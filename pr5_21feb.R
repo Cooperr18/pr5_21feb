@@ -66,13 +66,8 @@ indice_max <- which(archaeological_data$numero_artefactos == maximo_artefactos)
 cat("El valor máximo se encuentra en la fila:", indice_max)
 
 #11
-aggregate(numero_artefactos ~ site)
-tabla_resumen = data.frame(
-  Media = media_artefactos,
-  Mediana = mediana_artefactos_yacimiento,
-  "Desviación Estándard" = desviacion_estandar
-)
-print(tabla_resumen)
+resumen <- aggregate(numero_artefactos ~ site, archaeological_data, function(numero_artefactos) c(media = mean(numero_artefactos), mediana = median(numero_artefactos), desviacion_estandar = sd(numero_artefactos)))
+print(resumen)
 
 #12
 diagrama_cajas = boxplot(numero_artefactos ~ site, data = archaeological_data,
